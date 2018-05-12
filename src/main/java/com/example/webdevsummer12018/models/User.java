@@ -1,5 +1,7 @@
 package com.example.webdevsummer12018.models;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +15,11 @@ public class User {
 	private String username;
 	private String password;
 	private String firstName;
-	private String lasteName;
+	private String lastName;
+	private String phone;
+	private String email;
+	private Date Dob;
+	
 	public int getId() {
 		return id;
 	}
@@ -38,10 +44,29 @@ public class User {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	public String getLasteName() {
-		return lasteName;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setLasteName(String lasteName) {
-		this.lasteName = lasteName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public Date getDob() {
+		return Dob;
+	}
+	public void setDob(Date dob) {
+		Dob = dob;
 	}
 }

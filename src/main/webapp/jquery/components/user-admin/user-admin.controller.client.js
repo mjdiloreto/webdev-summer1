@@ -22,8 +22,6 @@
     }
 
     function createUser() {
-        console.log('createUser');
-
         var username = $('#usernameFld').val();
         var password = $('#passwordFld').val();
         var firstName = $('#firstNameFld').val();
@@ -54,6 +52,13 @@
 
             clone.find('.username')
                 .html(user.username);
+            clone.find('.password')
+                .html(user.password);
+            clone.find('.firstname')
+                .html(user.firstName);
+            clone.find('.lastname')
+                .html(user.lastName);
+
             tbody.append(clone);
         }
     }
@@ -71,7 +76,6 @@
     }
 
     function editUser(event) {
-        console.log('editUser');
         console.log(event);
     }
 

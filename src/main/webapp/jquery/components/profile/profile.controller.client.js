@@ -43,9 +43,8 @@
     }
     
     function renderUser(user) {
-        console.log(user);
         $staticEmail.val(user.username);
         $firstName.val(user.firstName);
-        $lastName.val(user.lasteName);
+        $lastName.val(user.lastName);
     }
 })();

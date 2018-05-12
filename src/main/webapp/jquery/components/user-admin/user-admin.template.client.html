@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href=
+            "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
 <title>Insert title here</title>
   <script
           src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -23,6 +26,7 @@
         <th>Password</th>
         <th>First Name</th>
         <th>Last Name</th>
+        <th>Role</th>
         <th></th>
       </tr>
       <tr>
@@ -30,19 +34,26 @@
         <th><input id="passwordFld" class="form-control" type="password"/></th>
         <th><input id="firstNameFld" class="form-control" placeholder="John"/></th>
         <th><input id="lastNameFld" class="form-control" placeholder="Doe"/></th>
-        <th><button id="createUser" class="btn btn-success">Create</button></th>
+        <td><select id="roleFld" class="form-control">
+          <option value="FACULTY">Faculty</option>
+          <option value="STUDENT">Student</option>
+        </select></td>
+        <td nowrap><i id="searchUser" class="fa fa-search" style="cursor:pointer;font-size:30px;"></i>
+          <i id="createUser" class="fa fa-plus" style="cursor:pointer;font-size:30px;"></i>
+          <i id="editUser" class="fa fa-check" style="cursor:pointer;font-size:30px;"></i></td>
       </tr>
     </thead>
     <tbody>
       <tr class="template">
-        <td class="username">alice</td>
-        <td>****</td>
-        <td>Alice</td>
-        <td>Wonderland</td>
-        <th>
-          <button class="delete btn btn-danger">Delete</button>
-          <button class="edit btn btn-danger">Edit</button>
-        </th>
+        <td class="username"></td>
+        <td class="password"></td>
+        <td class="firstname"></td>
+        <td class="lastname"></td>
+        <td class="role"></td>
+        <td nowrap>
+          <i class="fa fa-times delete" style="font-size:30px;cursor:pointer"></i>
+          <i class="fa fa-pencil edit" style="font-size:30px;cursor:pointer"></i>
+        </td>
       </tr>
     </tbody>
     <tfoot></tfoot>
