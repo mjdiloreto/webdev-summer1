@@ -7,10 +7,32 @@
     var template;
     var userService = new UserServiceClient()
 
+    var $unameFld;
+    var $pwFld;
+    var $fnameFld;
+    var $lnameFld;
+    var $roleFld;
+
+    var $searchUser;
+    var $createUser;
+    var $saveUser;
+
     function main() {
         tbody = $('tbody');
         template = $('.template');
-        $('#createUser').click(createUser);
+        $('#createUser')
+
+        $unameFld = $('#usernameFld');
+        $pwFld = $('#passwordFld');
+        $fnameFld = $('#firstNameFld');
+        $lnameFld = $('#lastNameFld');
+        $roleFld = $('#roleFld');
+
+        $searchUser = $('#searchUser');
+        $createUser = $('#createUser');
+        $saveUser = $('#saveUser');
+
+        $createUser.click(createUser);
 
         findAllUsers();
     }
@@ -22,16 +44,21 @@
     }
 
     function createUser() {
-        var username = $('#usernameFld').val();
-        var password = $('#passwordFld').val();
-        var firstName = $('#firstNameFld').val();
-        var lastName = $('#lastNameFld').val();
+        var username = $unameFld.val();
+        var password = $pwFld.val();
+        var firstName = $fnameFld.val();
+        var lastName = $lnameFld.val();
+        var role = $roleFld.val();
 
         var user = {
             username: username,
             password: password,
             firstName: firstName,
-            lastName: lastName
+            lastName: lastName,
+            role: role,
+            phone: "f",
+            email: "vd",
+            dob: "1232"
         };
 
         userService
@@ -58,17 +85,21 @@
                 .html(user.firstName);
             clone.find('.lastname')
                 .html(user.lastName);
+            clone.find('.role')
+                .html(user.role);
 
             tbody.append(clone);
         }
     }
 
+    // Given the button Jquery obj of the row, what is the id of the User?
+    function getUserId(button) {
+        return button.parent().parent().attr('id');
+    }
+
     function deleteUser(event) {
         var deleteBtn = $(event.currentTarget);
-        var userId = deleteBtn
-            .parent()
-            .parent()
-            .attr('id');
+        var userId = getUserId(deleteBtn);
 
         userService
             .deleteUser(userId)
@@ -76,7 +107,16 @@
     }
 
     function editUser(event) {
-        console.log(event);
+        var id = getUserId($(event.currentTarget));
+
+        var user = userService.findUserById(id).then(populateForm);
     }
 
+    function populateForm(user) {
+        $unameFld.val(user.username);
+        $pwFld.val(user.password);
+        $fnameFld.val(user.firstName);
+        $lnameFld.val(user.lastName);
+        $roleFld.val(user.role);
+    }
 })();

@@ -16,9 +16,10 @@ public class User {
 	private String password;
 	private String firstName;
 	private String lastName;
+	private String role;
 	private String phone;
 	private String email;
-	private Date Dob;
+	private Date dob;
 	
 	public int getId() {
 		return id;
@@ -50,12 +51,17 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
 	public String getPhone() {
 		return phone;
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	public String getEmail() {
 		return email;
@@ -64,9 +70,9 @@ public class User {
 		this.email = email;
 	}
 	public Date getDob() {
-		return Dob;
+		return dob;
 	}
 	public void setDob(Date dob) {
-		Dob = dob;
+		dob = dob;
 	}
 }
