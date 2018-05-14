@@ -7,11 +7,12 @@ function UserServiceClient() {
     this.findUserById = findUserById;
     this.updateUser = updateUser;
     this.findUserByUsername = findUserByUsername;
-    this.login = login();
+    this.login = login;
+
     this.url =
-        'http://localhost:8080/api/user';
+        '/api/user';
     this.loginUrl =
-        'http://localhost:8080/api/login';
+        '/api/login';
 
     function login(username, password) {
         return fetch(self.loginUrl, {
