@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.webdevsummer12018.repositories.UserRepository;
@@ -36,19 +37,15 @@ public class UserService {
 		return (List<User>) repository.findUserByCredentials(user.getUsername(), user.getPassword());
 	}
 	
-	/**
-	 * Return a list of all users that match the given username, or all users registered if no 
-	 * username is provided.
-	 * 
-	 * @param username - Optional argument to filter the list of all users
-	 */
 	@GetMapping("/api/user")
-	public List<User> findAllUsers(@RequestBody(required=false) String username) {
-		if(username != null) {
-			return (List<User>) repository.findAll();
-		} else {
+	public List<User> findAllUsers(@RequestParam(value="username", required=false) String username) {
+		if(username != null && !username.isEmpty())	{
+			// Username was provided so search for that user
 			return (List<User>) repository.findUserByUsername(username);
+		} else { // username was not provided
+			return (List<User>) repository.findAll();
 		}
+			
 	}
 	
 	@PutMapping("/api/user/{userId}")
