@@ -73,6 +73,6 @@ public class User {
 		return dob;
 	}
 	public void setDob(Date dob) {
-		dob = dob;
+		this.dob = dob;
 	}
 }

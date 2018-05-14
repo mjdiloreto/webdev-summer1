@@ -36,9 +36,19 @@ public class UserService {
 		return (List<User>) repository.findUserByCredentials(user.getUsername(), user.getPassword());
 	}
 	
+	/**
+	 * Return a list of all users that match the given username, or all users registered if no 
+	 * username is provided.
+	 * 
+	 * @param username - Optional argument to filter the list of all users
+	 */
 	@GetMapping("/api/user")
-	public List<User> findAllUsers() {
-		return (List<User>) repository.findAll();
+	public List<User> findAllUsers(@RequestBody(required=false) String username) {
+		if(username != null) {
+			return (List<User>) repository.findAll();
+		} else {
+			return (List<User>) repository.findUserByUsername(username);
+		}
 	}
 	
 	@PutMapping("/api/user/{userId}")
