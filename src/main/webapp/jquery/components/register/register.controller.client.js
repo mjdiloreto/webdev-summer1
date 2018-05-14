@@ -23,25 +23,30 @@
         }
 
         // verify that the username isn't taken
-        if(usernameExists()) {
-            alert("Username is already taken.");
-            return;
-        }
+        usernameExists().then(
+            function(responseJson) {
+                var maybeUser = responseJson.length;
 
-        uname = $usernameFld.val();
-        pword = $passwordFld.val();
-        userService.createUser(new User(uname, pword));
+                if(maybeUser) {
+                    alert("Username is already taken.");
+                    return;
+                } else {
+                    uname = $usernameFld.val();
+                    pword = $passwordFld.val();
+                    userService.createUser(new User(uname, pword));
+                }
+            }
+        );
     }
 
     function verifyMatchingPasswords() {
-        console.log("verify passwords " + ($passwordFld.val() === $verifyPasswordFld.val()))
         return $passwordFld.val() === $verifyPasswordFld.val();
     }
 
-    // Returns the length of the array of Users that match the given username
-    // (0 === false)
+    // Returns the array of Users that match the given username
     function usernameExists() {
-        return userService.findUserByUsername($usernameFld.val()).length;
+        var username = $usernameFld.val();
+        return userService.findUserByUsername(username);
     }
 
 

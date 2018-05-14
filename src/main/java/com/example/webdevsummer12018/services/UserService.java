@@ -44,8 +44,7 @@ public class UserService {
 			return (List<User>) repository.findUserByUsername(username);
 		} else { // username was not provided
 			return (List<User>) repository.findAll();
-		}
-			
+		}		
 	}
 	
 	@PutMapping("/api/user/{userId}")
