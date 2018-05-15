@@ -53,6 +53,10 @@ public class UserService {
 		if(data.isPresent()) {
 			User user = data.get();
 			user.setFirstName(newUser.getFirstName());
+			user.setLastName(newUser.getLastName());
+			user.setRole(newUser.getRole());
+			user.setPassword(newUser.getPassword());
+
 			repository.save(user);
 			return user;
 		}

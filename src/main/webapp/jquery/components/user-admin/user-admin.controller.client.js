@@ -33,6 +33,7 @@
         $saveUser = $('#saveUser');
 
         $createUser.click(createUser);
+        $saveUser.click(saveUser);
 
         findAllUsers();
     }
@@ -43,7 +44,7 @@
             .then(renderUsers);
     }
 
-    function createUser() {
+    function newUserFromForm() {
         var username = $unameFld.val();
         var password = $pwFld.val();
         var firstName = $fnameFld.val();
@@ -51,6 +52,11 @@
         var role = $roleFld.val();
 
         var user = new User(username, password, firstName, lastName, role);
+        return user;
+    }
+
+    function createUser() {
+        var user = newUserFromForm();
 
         userService
             .createUser(user)
@@ -109,5 +115,20 @@
         $fnameFld.val(user.firstName);
         $lnameFld.val(user.lastName);
         $roleFld.val(user.role);
+    }
+
+    // Find the user whose username is in the form and update their info
+    // to the info in the input fields.
+    function saveUser() {
+        var user = newUserFromForm();
+
+        userService.findUserByUsername(user.getUsername())
+            .then(function(responseUsers) {
+
+                // The user is the first in the 1-element array
+                var responseUser = responseUsers[0];
+                console.log(responseUser);
+                userService.updateUser(responseUser.id, user);
+            }).then(findAllUsers)
     }
 })();
