@@ -50,16 +50,7 @@
         var lastName = $lnameFld.val();
         var role = $roleFld.val();
 
-        var user = {
-            username: username,
-            password: password,
-            firstName: firstName,
-            lastName: lastName,
-            role: role,
-            phone: "f",
-            email: "vd",
-            dob: "1232"
-        };
+        var user = new User(username, password, firstName, lastName, role);
 
         userService
             .createUser(user)

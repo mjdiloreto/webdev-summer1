@@ -18,10 +18,9 @@
     }
 
     function updateUser() {
-        var user = {
-            firstName: $firstName.val(),
-            lastName: $lastName.val()
-        };
+        var user = new User();
+        user.setFirstName($firstName.val());
+        user.setLastName($lastName.val());
 
         userService
             .updateUser(12, user)
