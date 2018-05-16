@@ -13,6 +13,7 @@
         $lastName = $("#lastName");
         $updateBtn = $("#updateBtn")
             .click(updateUser);
+        $('#datetimepicker1').datepicker();
 
         findUserById(12);
     }

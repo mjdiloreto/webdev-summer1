@@ -31,9 +31,18 @@
                     alert("Username is already taken.");
                     return;
                 } else {
+                    // create the user on the server and log them in and go to
+                    // their profile page
                     uname = $usernameFld.val();
                     pword = $passwordFld.val();
-                    userService.createUser(new User(uname, pword));
+                    userService.createUser(new User(uname, pword))
+                        .then(function() {
+                            userService.login(uname, pword)
+                                .then(function (users) {
+                                    console.log(users);
+                                })
+
+                        });
                 }
             }
         );

@@ -14,7 +14,10 @@
     }
 
     function login() {
-        userService.login($usernameFld.val(), $passwordFld.val());
+        userService.login($usernameFld.val(), $passwordFld.val())
+            .then(function(users) {
+                console.log(users);
+            });
         console.log("Logged in.")
     }
 
