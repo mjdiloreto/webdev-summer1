@@ -38,10 +38,11 @@
                     userService.createUser(new User(uname, pword))
                         .then(function() {
                             userService.login(uname, pword)
-                                .then(function (users) {
-                                    console.log(users);
+                                .then(function(users) {
+                                    var id = users[0].id;
+                                    window.location.href = '../profile/profile.template.client.html'
+                                        + "?id=" + id;
                                 })
-
                         });
                 }
             }
