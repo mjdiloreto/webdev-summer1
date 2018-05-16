@@ -4,6 +4,12 @@
     var $staticEmail;
     var $firstName;
     var $lastName;
+    var $username;
+    var $password;
+    var $role;
+    var $dob;
+    var $phone;
+
     var $updateBtn;
     var userService = new UserServiceClient();
 
@@ -11,11 +17,19 @@
         $staticEmail = $("#staticEmail");
         $firstName = $("#firstName");
         $lastName = $("#lastName");
-        $updateBtn = $("#updateBtn")
-            .click(updateUser);
-        $('#datetimepicker1').datepicker();
+        $username = $("#staticUsername");
+        $password = $("#inputPassword");
+        $role = $("#role");
+        $dob = $("#datetimepicker");
+        $phone = $("#phone");
 
-        findUserById(12);
+        $updateBtn = $("#updateBtn");
+
+        $updateBtn.click(updateUser);
+        //$('#datetimepicker1').datepicker();
+
+        var vars = getUrlVars();
+        userService.findUserById(vars["id"]).then(renderUser);
     }
 
     function updateUser() {
@@ -43,8 +57,31 @@
     }
     
     function renderUser(user) {
-        $staticEmail.val(user.username);
+        $staticEmail.val(user.email);
         $firstName.val(user.firstName);
         $lastName.val(user.lastName);
+
+        $username.val(user.username);
+        $password.val(user.password);
+        $role.val(user.role);
+        $dob.val(user.dob);
+        $phone.val(user.phone);
+    }
+
+    // Read a page's GET URL variables and return them as an associative array.
+    // FROM: https://stackoverflow.com/questions/4656843/
+    // jquery-get-querystring-from-url?utm_medium=organic&utm_source
+    // =google_rich_qa&utm_campaign=google_rich_qa
+    function getUrlVars()
+    {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++)
+        {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
     }
 })();
