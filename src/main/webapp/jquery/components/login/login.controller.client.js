@@ -16,9 +16,10 @@
     function login() {
         userService.login($usernameFld.val(), $passwordFld.val())
             .then(function(users) {
-                console.log(users);
+                var id = users[0].id;
+                window.location.href = '../profile/profile.template.client.html'
+                    + "?id=" + id;
             });
-        console.log("Logged in.")
     }
 
 })();

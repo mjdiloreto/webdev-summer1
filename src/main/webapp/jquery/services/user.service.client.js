@@ -21,7 +21,9 @@ function UserServiceClient() {
             headers: {
                 'content-type': 'application/json'
             }
-        });
+        }).then(function(response) {
+                return response.json();
+            });
     }
 
     function updateUser(userId, user) {
