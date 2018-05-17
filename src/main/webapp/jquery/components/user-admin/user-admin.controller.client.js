@@ -127,7 +127,6 @@
 
                 // The user is the first in the 1-element array
                 var responseUser = responseUsers[0];
-                console.log(responseUser);
                 userService.updateUser(responseUser.id, user);
             }).then(findAllUsers)
     }

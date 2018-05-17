@@ -3,7 +3,7 @@
 
     var urlVars;
 
-    var $staticEmail;
+    var $email;
     var $firstName;
     var $lastName;
     var $username;
@@ -16,7 +16,7 @@
     var userService = new UserServiceClient();
 
     function init() {
-        $staticEmail = $("#staticEmail");
+        $email = $("#email");
         $firstName = $("#firstName");
         $lastName = $("#lastName");
         $username = $("#staticUsername");
@@ -36,6 +36,8 @@
 
     function updateUser() {
         var user = new User();
+
+        user.setEmail($email.val());
         user.setFirstName($firstName.val());
         user.setLastName($lastName.val());
         user.setPassword($password.val());
@@ -43,7 +45,6 @@
         user.setDob($dob.val());
         user.setPhone($phone.val());
 
-        console.log("updating user " + user.dob);
         userService
             .updateUser(urlVars['id'], user)
             .then(success);
@@ -64,7 +65,7 @@
     }
     
     function renderUser(user) {
-        $staticEmail.val(user.email);
+        $email.val(user.email);
         $firstName.val(user.firstName);
         $lastName.val(user.lastName);
 

@@ -1,4 +1,4 @@
-function User(username, password, firstName, lastName, role, phone, Email, dob) {
+function User(username, password, firstName, lastName, role, phone, email, dob) {
 
     this.username = username;
     this.password = password;
@@ -6,7 +6,7 @@ function User(username, password, firstName, lastName, role, phone, Email, dob) 
     this.lastName = lastName;
     this.role = role;
     this.phone = phone;
-    this.Email = Email;
+    this.email = email;
     this.dob = dob;
 
     this.setUsername = setUsername;
@@ -77,12 +77,12 @@ function User(username, password, firstName, lastName, role, phone, Email, dob) 
         return this.phone;
     }
 
-    function setEmail(Email) {
-        this.Email = Email;
+    function setEmail(email) {
+        this.email = email;
     }
 
     function getEmail() {
-        return this.Email;
+        return this.email;
     }
 
     function setDob(dob) {
