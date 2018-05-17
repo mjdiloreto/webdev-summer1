@@ -11,6 +11,7 @@
     var $role;
     var $dob;
     var $phone;
+    var $logoutBtn;
 
     var $updateBtn;
     var userService = new UserServiceClient();
@@ -25,9 +26,11 @@
         $dob = $("#datetimepicker");
         $phone = $("#phone");
 
+        $logoutBtn = $("#logoutBtn");
         $updateBtn = $("#updateBtn");
 
         $updateBtn.click(updateUser);
+        $logoutBtn.click(logout);
         //$('#datetimepicker1').datepicker();
 
         urlVars = getUrlVars();
@@ -74,6 +77,11 @@
         $role.val(user.role);
         $dob.val(user.dob);
         $phone.val(user.phone);
+    }
+
+    // TODO use HttpSession
+    function logout() {
+        window.location.href = '../login/login.template.client.html'
     }
 
     // Read a page's GET URL variables and return them as an associative array.
