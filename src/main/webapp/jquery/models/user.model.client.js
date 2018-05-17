@@ -23,8 +23,11 @@ function User(username, password, firstName, lastName, role, phone, Email, dob) 
     this.getPassword = getPassword;
     this.setEmail = setEmail;
     this.getEmail = getEmail;
+    this.setPhone = setPhone;
+    this.getPhone = getPhone;
     this.setDob = setDob;
     this.getDob = getDob;
+    this.parseDob = parseDob;
 
     function setUsername(username) {
         this.username = username;
@@ -88,5 +91,9 @@ function User(username, password, firstName, lastName, role, phone, Email, dob) 
 
     function getDob() {
         return this.dob;
+    }
+
+    function parseDob(dob) {
+        return dob.substring(0, dob.indexOf('T'));
     }
 }

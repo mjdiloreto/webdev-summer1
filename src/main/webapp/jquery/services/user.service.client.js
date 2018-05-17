@@ -21,9 +21,7 @@ function UserServiceClient() {
             headers: {
                 'content-type': 'application/json'
             }
-        }).then(function(response) {
-                return response.json();
-            });
+        }).then(responseToJson);
     }
 
     function updateUser(userId, user) {
@@ -34,20 +32,12 @@ function UserServiceClient() {
                 'content-type': 'application/json'
             }
         })
-        .then(function(response){
-            if(response.bodyUsed) {
-                return response.json();
-            } else {
-                return null;
-            }
-        });
+        .then(responseToJson);
     }
 
     function findUserById(userId) {
         return fetch(self.url + '/' + userId)
-            .then(function(response){
-                return response.json();
-            });
+            .then(responseToJson);
     }
 
     function deleteUser(userId) {
@@ -58,9 +48,7 @@ function UserServiceClient() {
 
     function findAllUsers() {
         return fetch(self.url)
-            .then(function (response) {
-                return response.json();
-            });
+            .then(responseToJson);
     }
 
     function createUser(user) {
@@ -75,8 +63,10 @@ function UserServiceClient() {
 
     function findUserByUsername(username) {
         return fetch(self.url + "?username=" + username)
-            .then(function (response) {
-                return response.json();
-        });
+            .then(responseToJson);
+    }
+
+    function responseToJson(response) {
+        return response.json();
     }
 }

@@ -1,6 +1,8 @@
 (function() {
     $(init);
 
+    var urlVars;
+
     var $staticEmail;
     var $firstName;
     var $lastName;
@@ -28,17 +30,22 @@
         $updateBtn.click(updateUser);
         //$('#datetimepicker1').datepicker();
 
-        var vars = getUrlVars();
-        userService.findUserById(vars["id"]).then(renderUser);
+        urlVars = getUrlVars();
+        userService.findUserById(urlVars["id"]).then(renderUser);
     }
 
     function updateUser() {
         var user = new User();
         user.setFirstName($firstName.val());
         user.setLastName($lastName.val());
+        user.setPassword($password.val());
+        user.setRole($role.val());
+        user.setDob($dob.val());
+        user.setPhone($phone.val());
 
+        console.log("updating user " + user.dob);
         userService
-            .updateUser(12, user)
+            .updateUser(urlVars['id'], user)
             .then(success);
     }
 
