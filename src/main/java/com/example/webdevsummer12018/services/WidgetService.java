@@ -1,5 +1,6 @@
 package com.example.webdevsummer12018.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,6 @@ public class WidgetService {
 		}
 		return null;
 	}
-
 	
 	@PostMapping("/api/lesson/{lessonId}/widget")
 	public Widget createWidget(@RequestBody Widget widget, 
@@ -56,6 +56,20 @@ public class WidgetService {
 			Lesson les = l.get();
 			widget.setLesson(les);  // the lesson belongs to this module
 			return widgetRepository.save(widget);
+		}
+		return null;
+	}
+	
+	@PostMapping("/api/lesson/{lessonId}/widgets")
+	public Iterable<Widget> createAllWidgetsForLesson(@RequestBody Iterable<Widget> widgets,
+			@PathVariable("lessonId") int lessonId) {
+		Optional<Lesson> l = lessonRepository.findById(lessonId);
+		if(l.isPresent()) {
+			Lesson les = l.get();
+			for(Widget w: widgets) {
+				w.setLesson(les);
+			}
+			return widgetRepository.saveAll(widgets);
 		}
 		return null;
 	}
@@ -70,7 +84,11 @@ public class WidgetService {
 		Optional<Lesson> l = lessonRepository.findById(lessonId);
 		if(l.isPresent()) {
 			Lesson les = l.get();
-			return les.getWidgets();
+			Iterable<Widget> widgets = les.getWidgets();
+			
+			((List<Widget>) widgets).sort((a, b) -> a.getOrder().compareTo(b.getOrder()));
+			
+			return widgets;
 		}
 		return null;
 	}
