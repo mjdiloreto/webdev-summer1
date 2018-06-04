@@ -23,7 +23,16 @@ public class Lesson {
   private Module module;
   
   @OneToMany(mappedBy="lesson")
+  @JsonIgnore
   private List<Widget> widgets;
+  
+  @OneToMany(mappedBy="lesson")
+  @JsonIgnore
+  private List<Assignment> assignments;
+  
+  @OneToMany(mappedBy="lesson")
+  @JsonIgnore
+  private List<Exam> exams;
   
   public int getId() {
     return id;
@@ -43,10 +52,16 @@ public class Lesson {
   public void setModule(Module module) {
 	this.module = module;
   }
-public List<Widget> getWidgets() {
+  public List<Widget> getWidgets() {
 	return widgets;
-}
-public void setWidgets(List<Widget> widgets) {
+  }
+  public void setWidgets(List<Widget> widgets) {
 	this.widgets = widgets;
-}
+  }
+  public List<Assignment> getAssignments() {
+	return assignments;
+  }
+  public void setAssignments(List<Assignment> assignments) {
+	this.assignments = assignments;
+  }
 }

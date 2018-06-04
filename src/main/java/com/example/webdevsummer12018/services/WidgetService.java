@@ -40,7 +40,7 @@ public class WidgetService {
 	}
 	
 	@GetMapping("/api/widget/{widgetId}")
-	public Widget findLessonById(@PathVariable("widgetId") int id) {
+	public Widget findWidgetById(@PathVariable("widgetId") int id) {
 		Optional<Widget> w = widgetRepository.findById(id);
 		if(w.isPresent()) {
 			return w.get();
