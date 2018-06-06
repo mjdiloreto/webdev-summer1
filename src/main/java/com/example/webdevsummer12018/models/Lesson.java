@@ -64,4 +64,10 @@ public class Lesson {
   public void setAssignments(List<Assignment> assignments) {
 	this.assignments = assignments;
   }
+  public List<Exam> getExams() {
+	return exams;
+  }
+  public void setExams(List<Exam> exams) {
+	this.exams = exams;
+  }
 }

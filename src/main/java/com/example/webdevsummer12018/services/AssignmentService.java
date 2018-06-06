@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.webdevsummer12018.models.Assignment;
 import com.example.webdevsummer12018.models.Lesson;
+import com.example.webdevsummer12018.models.Module;
 import com.example.webdevsummer12018.repositories.AssignmentRepository;
 import com.example.webdevsummer12018.repositories.LessonRepository;
 
@@ -49,6 +51,28 @@ public class AssignmentService {
 			Lesson les = l.get();
 			assignment.setLesson(les);  // the lesson belongs to this module
 			return assignmentRepository.save(assignment);
+		}
+		return null;
+	}
+	
+	@PutMapping("/api/assignment/{assignmentId}")
+	public Assignment updateAssignment(@RequestBody Assignment assignment, 
+			@PathVariable("assignmentId") int assignmentId) {
+		Optional<Assignment> optAssignment = assignmentRepository.findById(assignmentId);
+		if(optAssignment.isPresent()) {
+			Assignment oldAssignment = optAssignment.get();
+			
+			if(assignment.getTitle() != null) {
+				oldAssignment.setTitle(assignment.getTitle());
+			}
+			if(assignment.getDescription() != null) {
+				oldAssignment.setDescription(assignment.getDescription());
+			}
+			if(assignment.getPoints() != null) {
+				oldAssignment.setPoints(assignment.getPoints());
+			}
+			
+			return oldAssignment;
 		}
 		return null;
 	}

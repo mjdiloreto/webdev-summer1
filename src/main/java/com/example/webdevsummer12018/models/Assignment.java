@@ -15,8 +15,7 @@ public class Assignment {
 	private int id;
 	private String title;
 	private String description;
-	private int points;
-	
+	private Integer points;
 	@ManyToOne
 	@JsonIgnore
 	private Lesson lesson;
@@ -42,10 +41,10 @@ public class Assignment {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getPoints() {
+	public Integer getPoints() {
 		return points;
 	}
-	public void setPoints(int points) {
+	public void setPoints(Integer points) {
 		this.points = points;
 	}
 	public Lesson getLesson() {
