@@ -26,6 +26,12 @@ public class Exam {
 	@JsonIgnore
 	private Lesson lesson;
 	
+	public int getId() {
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getTitle() {
 		return title;
 	}
