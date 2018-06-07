@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.webdevsummer12018.models.Exam;
 import com.example.webdevsummer12018.models.Lesson;
 import com.example.webdevsummer12018.models.questions.Essay;
+import com.example.webdevsummer12018.models.questions.FillInTheBlank;
+import com.example.webdevsummer12018.models.questions.MultipleChoice;
 import com.example.webdevsummer12018.models.questions.Question;
+import com.example.webdevsummer12018.models.questions.TrueOrFalse;
 import com.example.webdevsummer12018.repositories.ExamRepository;
 import com.example.webdevsummer12018.repositories.LessonRepository;
 import com.example.webdevsummer12018.repositories.question_repos.EssayRepo;
@@ -99,6 +102,42 @@ public class ExamService {
 			Exam exam = e.get();
 			essay.setExam(exam);
 			return essayRepo.save(essay);
+		}
+		return null;
+	}
+	
+	@PostMapping("/api/exam/{examId}/choice")
+	public MultipleChoice createMultipleChoiceForExam(@RequestBody MultipleChoice mc,
+			@PathVariable("examId") int id) {
+		Optional<Exam> e = examRepository.findById(id);
+		if(e.isPresent()) {
+			Exam exam = e.get();
+			mc.setExam(exam);
+			return multipleChoiceRepo.save(mc);
+		}
+		return null;
+	}
+	
+	@PostMapping("/api/exam/{examId}/blanks")
+	public FillInTheBlank createFillInTheBlankForExam(@RequestBody FillInTheBlank fib,
+			@PathVariable("examId") int id) {
+		Optional<Exam> e = examRepository.findById(id);
+		if(e.isPresent()) {
+			Exam exam = e.get();
+			fib.setExam(exam);
+			return fillInTheBlankRepo.save(fib);
+		}
+		return null;
+	}
+	
+	@PostMapping("/api/exam/{examId}/truefalse")
+	public TrueOrFalse createTrueOrFalseForExam(@RequestBody TrueOrFalse tf,
+			@PathVariable("examId") int id) {
+		Optional<Exam> e = examRepository.findById(id);
+		if(e.isPresent()) {
+			Exam exam = e.get();
+			tf.setExam(exam);
+			return trueOrFalseRepo.save(tf);
 		}
 		return null;
 	}
