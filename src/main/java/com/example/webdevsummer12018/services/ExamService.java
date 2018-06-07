@@ -147,8 +147,9 @@ public class ExamService {
 			if(exam.getPoints() != null) {
 				oldExam.setPoints(exam.getPoints());
 			}
+			
 			// Don't update the questions. See if this is needed
-			return oldExam;
+			return examRepository.save(oldExam);
 		}
 		return null;
 	}
