@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -126,6 +127,28 @@ public class ExamService {
 			Exam exam = e.get();
 			fib.setExam(exam);
 			return fillInTheBlankRepo.save(fib);
+		}
+		return null;
+	}
+	
+	@PutMapping("/api/exam/{examId}")
+	public Exam updateExam(@RequestBody Exam exam, 
+			@PathVariable("examId") int examId) {
+		Optional<Exam> optExam = examRepository.findById(examId);
+		if(optExam.isPresent()) {
+			Exam oldExam = optExam.get();
+			
+			if(exam.getTitle() != null) {
+				oldExam.setTitle(exam.getTitle());
+			}
+			if(exam.getDescription() != null) {
+				oldExam.setDescription(exam.getDescription());
+			}
+			if(exam.getPoints() != null) {
+				oldExam.setPoints(exam.getPoints());
+			}
+			// Don't update the questions. See if this is needed
+			return oldExam;
 		}
 		return null;
 	}
