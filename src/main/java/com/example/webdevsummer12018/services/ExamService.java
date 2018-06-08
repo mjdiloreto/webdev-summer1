@@ -107,6 +107,28 @@ public class ExamService {
 		return null;
 	}
 	
+	@PutMapping("/api/essay/{questionId}")
+	public Essay updateEssay(@RequestBody Essay essay, 
+			@PathVariable("questionId") int questionId) {
+		Optional<Essay> optEssay = essayRepo.findById(questionId);
+		if(optEssay.isPresent()) {
+			Essay oldEssay = optEssay.get();
+			
+			if(essay.getTitle() != null) {
+				oldEssay.setTitle(essay.getTitle());
+			}
+			if(essay.getDescription() != null) {
+				oldEssay.setDescription(essay.getDescription());
+			}
+			if(essay.getPoints() != null) {
+				oldEssay.setPoints(essay.getPoints());
+			}
+			
+			return essayRepo.save(oldEssay);
+		}
+		return null;
+	}
+	
 	@PostMapping("/api/exam/{examId}/choice")
 	public MultipleChoice createMultipleChoiceForExam(@RequestBody MultipleChoice mc,
 			@PathVariable("examId") int id) {
@@ -119,6 +141,31 @@ public class ExamService {
 		return null;
 	}
 	
+	@PutMapping("/api/choice/{questionId}")
+	public MultipleChoice updateMultipleChoice(@RequestBody MultipleChoice mc, 
+			@PathVariable("questionId") int questionId) {
+		Optional<MultipleChoice> optMc = multipleChoiceRepo.findById(questionId);
+		if(optMc.isPresent()) {
+			MultipleChoice oldMc = optMc.get();
+			
+			if(mc.getTitle() != null) {
+				oldMc.setTitle(mc.getTitle());
+			}
+			if(mc.getDescription() != null) {
+				oldMc.setDescription(mc.getDescription());
+			}
+			if(mc.getPoints() != null) {
+				oldMc.setPoints(mc.getPoints());
+			}
+			if(mc.getChoices() != null) {
+				oldMc.setChoices(mc.getChoices());
+			}
+			
+			return multipleChoiceRepo.save(oldMc);
+		}
+		return null;
+	}
+	
 	@PostMapping("/api/exam/{examId}/blanks")
 	public FillInTheBlank createFillInTheBlankForExam(@RequestBody FillInTheBlank fib,
 			@PathVariable("examId") int id) {
@@ -127,6 +174,31 @@ public class ExamService {
 			Exam exam = e.get();
 			fib.setExam(exam);
 			return fillInTheBlankRepo.save(fib);
+		}
+		return null;
+	}
+	
+	@PutMapping("/api/blanks/{questionId}")
+	public FillInTheBlank updateFillInTheBlank(@RequestBody FillInTheBlank fb, 
+			@PathVariable("questionId") int questionId) {
+		Optional<FillInTheBlank> oldFb = fillInTheBlankRepo.findById(questionId);
+		if(oldFb.isPresent()) {
+			FillInTheBlank oldTf = oldFb.get();
+			
+			if(fb.getTitle() != null) {
+				oldTf.setTitle(fb.getTitle());
+			}
+			if(fb.getDescription() != null) {
+				oldTf.setDescription(fb.getDescription());
+			}
+			if(fb.getPoints() != null) {
+				oldTf.setPoints(fb.getPoints());
+			}
+			if(fb.getVariables() != null) {
+				oldTf.setVariables(fb.getVariables());
+			}
+			
+			return fillInTheBlankRepo.save(oldTf);
 		}
 		return null;
 	}
@@ -162,6 +234,31 @@ public class ExamService {
 			Exam exam = e.get();
 			tf.setExam(exam);
 			return trueOrFalseRepo.save(tf);
+		}
+		return null;
+	}
+	
+	@PutMapping("/api/truefalse/{questionId}")
+	public TrueOrFalse updateTrueOrFalse(@RequestBody TrueOrFalse tf, 
+			@PathVariable("questionId") int questionId) {
+		Optional<TrueOrFalse> optTf = trueOrFalseRepo.findById(questionId);
+		if(optTf.isPresent()) {
+			TrueOrFalse oldTf = optTf.get();
+			
+			if(tf.getTitle() != null) {
+				oldTf.setTitle(tf.getTitle());
+			}
+			if(tf.getDescription() != null) {
+				oldTf.setDescription(tf.getDescription());
+			}
+			if(tf.getPoints() != null) {
+				oldTf.setPoints(tf.getPoints());
+			}
+			if(tf.getIsTrue() != null) {
+				oldTf.setIsTrue(tf.getIsTrue());
+			}
+			
+			return trueOrFalseRepo.save(oldTf);
 		}
 		return null;
 	}

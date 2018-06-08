@@ -19,7 +19,7 @@ public class Question {
 	private int id;
 	private String title;
 	private String description;
-	private int points;
+	private Integer points;
 	private String type;
 	@ManyToOne
 	@JsonIgnore
@@ -44,10 +44,10 @@ public class Question {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getPoints() {
+	public Integer getPoints() {
 		return points;
 	}
-	public void setPoints(int points) {
+	public void setPoints(Integer points) {
 		this.points = points;
 	}
 	public String getType() {
