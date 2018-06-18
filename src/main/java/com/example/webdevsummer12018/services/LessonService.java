@@ -63,8 +63,19 @@ public class LessonService {
 	}
 	
 	@GetMapping("/api/course/{courseId}/module/{moduleId}/lesson")
-	public Iterable<Lesson> findAllLessonsForModule(@PathVariable("courseId") int courseId,
-			@PathVariable("moduleId") int moduleId) {
+	public Iterable<Lesson> findAllLessonsForModuleWithCourseId(
+		@PathVariable("courseId") int courseId,
+	    @PathVariable("moduleId") int moduleId) {
+		Optional<Module> m = moduleRepository.findById(moduleId);
+		if(m.isPresent()) {
+			Module mod = m.get();
+			return mod.getLessons();
+		}
+		return null;
+	}
+	
+	@GetMapping("/api/module/{moduleId}/lesson")
+	public Iterable<Lesson> findAllLessonsForModule(@PathVariable("moduleId") int moduleId) {
 		Optional<Module> m = moduleRepository.findById(moduleId);
 		if(m.isPresent()) {
 			Module mod = m.get();

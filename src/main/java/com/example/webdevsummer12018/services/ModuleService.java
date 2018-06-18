@@ -36,7 +36,7 @@ public class ModuleService {
 		return (List<Module>) moduleRepository.findAll();
 	}
 	
-	@GetMapping("/api/lesson/{moduleId}")
+	@GetMapping("/api/module/{moduleId}")
 	public Module findModuleById(@PathVariable("moduleId") int id) {
 		Optional<Module> m = moduleRepository.findById(id);
 		if(m.isPresent()) {
